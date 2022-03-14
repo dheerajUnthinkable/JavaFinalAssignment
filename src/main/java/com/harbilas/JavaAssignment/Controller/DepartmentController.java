@@ -18,10 +18,22 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @GetMapping
+    @GetMapping(path = "findDepartment")
     public List<Department> getDepartments()
     {
         return departmentService.getDepartments();
+    }
+
+    @GetMapping(path = "findDepartment/{deptID}")
+    public Department getDepartment(@PathVariable Long deptID)
+    {
+        return departmentService.getDepartment(deptID);
+    }
+
+    @GetMapping(path = "findEmployees/{deptID}")
+    public List<String> getEmployeesByDeptID(@PathVariable Long deptID)
+    {
+        return departmentService.getEmployeesByDeptID(deptID);
     }
 
     @PostMapping
@@ -31,9 +43,9 @@ public class DepartmentController {
     }
 
     @PutMapping(path = "updateDept/{departmentID}")
-    public void updateDepartment(@PathVariable Long departmentID, @RequestParam String name)
+    public void updateDepartment(@PathVariable Long departmentID, @RequestBody Department department)
     {
-        departmentService.updateDepartment(departmentID, name);
+        departmentService.updateDepartment(departmentID, department);
     }
 
     @DeleteMapping(path = "deleteDept/{departmentID}")

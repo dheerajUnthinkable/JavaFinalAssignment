@@ -1,6 +1,7 @@
 package com.harbilas.JavaAssignment.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.harbilas.JavaAssignment.Auditing.Auditable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "departments_table")
-public class Department {
+public class Department extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +17,17 @@ public class Department {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "head_of_dept")
+    private String head_of_dept;
+
+    public String getHead_of_dept() {
+        return head_of_dept;
+    }
+
+    public void setHead_of_dept(String head_of_dept) {
+        this.head_of_dept = head_of_dept;
+    }
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "departments")
     @JsonIgnore
@@ -25,8 +37,9 @@ public class Department {
 
     }
 
-    public Department(String name) {
+    public Department(String name, String head_of_dept) {
         this.name = name;
+        this.head_of_dept = head_of_dept;
     }
 
     public Long getId() {

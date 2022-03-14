@@ -97,4 +97,25 @@ public class EmployeeService {
             }
         }
     }
+
+    public void deleteEmployees(Long empID) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(empID);
+        if(optionalEmployee.isEmpty())
+        {
+            throw new IllegalStateException("Employee with ID: " + empID + " does not exist.");
+        }
+        employeeRepository.deleteById(empID);
+    }
+
+    public Employee getEmployee(Long empID) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(empID);
+        if(optionalEmployee.isEmpty())
+        {
+            throw new IllegalStateException("Employee with Employee ID: " + empID + " does not exist.");
+        }
+
+        Employee employee = optionalEmployee.get();
+
+        return employee;
+    }
 }

@@ -19,10 +19,16 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping
+    @GetMapping(path = "findEmployee")
     public List<Employee> getEmployees()
     {
         return employeeService.getEmployees();
+    }
+
+    @GetMapping(path = "findEmployee/{empID}")
+    public Employee getEmployee(@PathVariable Long empID)
+    {
+        return employeeService.getEmployee(empID);
     }
 
     @PostMapping
@@ -35,5 +41,11 @@ public class EmployeeController {
     public void updateEmployees(@PathVariable Long empID, @RequestBody EmployeeDTO employeeDTO)
     {
         employeeService.updateEmployees(empID, employeeDTO);
+    }
+
+    @DeleteMapping(path = "deleteEmp/{empID}")
+    public void deleteEmployees(@PathVariable Long empID)
+    {
+        employeeService.deleteEmployees(empID);
     }
 }
