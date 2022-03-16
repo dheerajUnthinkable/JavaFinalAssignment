@@ -97,4 +97,16 @@ public class Employee extends Auditable {
     public void setDepartments(List<Department> departments) {
         this.departments = departments;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", dob=" + dob +
+                ", email='" + email + '\'' +
+                ", departments=" + departments +
+                '}';
+    }
 }

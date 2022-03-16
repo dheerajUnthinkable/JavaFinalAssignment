@@ -2,8 +2,8 @@ package com.harbilas.JavaAssignment.Service;
 
 import com.harbilas.JavaAssignment.Entity.Department;
 import com.harbilas.JavaAssignment.Entity.Employee;
-import com.harbilas.JavaAssignment.Repsitory.DepartmentRepository;
-import com.harbilas.JavaAssignment.Repsitory.EmployeeRepository;
+import com.harbilas.JavaAssignment.Repository.DepartmentRepository;
+import com.harbilas.JavaAssignment.Repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +25,7 @@ public class DepartmentService {
     }
 
 
-    public void saveDepartments(Department department) {
+    public boolean saveDepartments(Department department) {
         if(department.getName().trim().equals(""))
         {
             throw new IllegalStateException("Department name cannot be empty!!");
@@ -45,6 +45,7 @@ public class DepartmentService {
         }
 
         departmentRepository.save(department);
+        return true;
     }
 
     @Transactional

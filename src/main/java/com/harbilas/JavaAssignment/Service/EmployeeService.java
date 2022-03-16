@@ -3,8 +3,8 @@ package com.harbilas.JavaAssignment.Service;
 import com.harbilas.JavaAssignment.DTO.EmployeeDTO;
 import com.harbilas.JavaAssignment.Entity.Department;
 import com.harbilas.JavaAssignment.Entity.Employee;
-import com.harbilas.JavaAssignment.Repsitory.DepartmentRepository;
-import com.harbilas.JavaAssignment.Repsitory.EmployeeRepository;
+import com.harbilas.JavaAssignment.Repository.DepartmentRepository;
+import com.harbilas.JavaAssignment.Repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +25,7 @@ public class EmployeeService {
     }
 
 
-    public void saveEmployees(EmployeeDTO employeeDTO) {
+    public boolean saveEmployees(EmployeeDTO employeeDTO) {
         Employee employee = new Employee(
                 employeeDTO.getName(),
                 employeeDTO.getPhoneNumber(),
@@ -50,10 +50,11 @@ public class EmployeeService {
             department.getEmployees().add(employee);
         }
         employeeRepository.save(employee);
+        return true;
     }
 
     @Transactional
-    public void updateEmployees(Long empID, EmployeeDTO employeeDTO) {
+    public boolean updateEmployees(Long empID, EmployeeDTO employeeDTO) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(empID);
         if(optionalEmployee.isEmpty())
         {
@@ -96,6 +97,8 @@ public class EmployeeService {
                 department.getEmployees().add(employee);
             }
         }
+
+        return true;
     }
 
     public void deleteEmployees(Long empID) {

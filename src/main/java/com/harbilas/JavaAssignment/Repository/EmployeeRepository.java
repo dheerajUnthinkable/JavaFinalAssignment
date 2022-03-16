@@ -1,4 +1,4 @@
-package com.harbilas.JavaAssignment.Repsitory;
+package com.harbilas.JavaAssignment.Repository;
 
 import com.harbilas.JavaAssignment.Entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
