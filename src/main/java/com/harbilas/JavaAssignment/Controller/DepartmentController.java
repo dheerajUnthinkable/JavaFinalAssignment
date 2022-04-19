@@ -16,6 +16,7 @@ public class DepartmentController {
     @Autowired
     public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
+        //Just a normal comment
     }
 
     @GetMapping(path = "findDepartment")
