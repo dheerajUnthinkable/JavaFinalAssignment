@@ -2,6 +2,7 @@ package com.harbilas.JavaAssignment.Service;
 
 import com.harbilas.JavaAssignment.Entity.Department;
 import com.harbilas.JavaAssignment.Entity.Employee;
+import com.harbilas.JavaAssignment.ExceptionClasses.NoDepartmentExists;
 import com.harbilas.JavaAssignment.Repository.DepartmentRepository;
 import com.harbilas.JavaAssignment.Repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,7 @@ public class DepartmentService {
         Optional<Department> departmentOptional = departmentRepository.findById(departmentID);
         if(departmentOptional.isEmpty())
         {
-            throw new IllegalStateException("There is no department with ID: " + departmentID + ".");
+            throw new NoDepartmentExists(departmentID.toString());
         }
 
         String name = department.getName() != null ? department.getName().trim().toUpperCase() : "";
@@ -98,7 +99,7 @@ public class DepartmentService {
         try {
             Optional<Department> departmentOptional = departmentRepository.findById(departmentID);
             if (departmentOptional.isEmpty()) {
-                throw new IllegalStateException("There is no department with ID: " + departmentID + ".");
+                throw new NoDepartmentExists(departmentID.toString());
             }
 
             departmentRepository.delete(departmentOptional.get());
@@ -112,7 +113,7 @@ public class DepartmentService {
     public Department getDepartment(Long deptID) {
         Optional<Department> optionalDepartment = departmentRepository.findById(deptID);
         if (optionalDepartment.isEmpty()) {
-            throw new IllegalStateException("There is no department with ID: " + deptID + ".");
+            throw new NoDepartmentExists(deptID.toString());
         }
 
         Department department = optionalDepartment.get();
@@ -122,7 +123,7 @@ public class DepartmentService {
     public List<String> getEmployeesByDeptID(Long deptID) {
         Optional<Department> departmentOptional = departmentRepository.findById(deptID);
         if (departmentOptional.isEmpty()) {
-            throw new IllegalStateException("There is no department with ID: " + deptID + ".");
+            throw new NoDepartmentExists(deptID.toString());
         }
         List<Employee> employeeList = employeeRepository.findAll();
         List<String> employeeNameList = new ArrayList<>();
